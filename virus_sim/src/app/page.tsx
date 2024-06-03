@@ -1,24 +1,33 @@
+
 import Image from "next/image";
 import { createRoot } from 'react-dom/client';
-import styles from "./virus-sim.module.css"
+import { PeopleMap} from './peopleMap.tsx'
 
-function NavigationBar() {
-  // TODO: Actually implement a navigation bar
-  return <h1>Hello from React!</h1>;
+const getData = (n) =>  Array(n).fill(0).map( (_,i)=> { return { x: Math.random(), y: Math.random(), status : "susceptible"  } }  )
+
+const getObstacles = () => [
+  {
+      x : 0,
+      y : 0.8,
+      width: 0.3,
+      height: 0.2    
+  },
+  {
+    x : 0.6,
+    y : 1,
+    width: 0.1,
+    height: 0.8    
 }
+]
+
 
 
 export default function Home() {
   return (
     <main >
       <h1> Virus simulation</h1>
-      <svg className={styles.sim} >
-        <circle cx={120} cy={80} r={10} ></circle>
-        <circle cx={160} cy={80} r={10} ></circle>
-        
-      </svg>
-
-
+    
+      <PeopleMap data={getData(100)} obstacles={ getObstacles()} />
     </main>
   );
 
